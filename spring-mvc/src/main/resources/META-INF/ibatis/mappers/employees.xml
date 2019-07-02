@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+	
+<sqlMap>
+	<!-- 사원등록 -->
+	<insert id="addEmp" parameterClass="kr.co.jhta.vo.Employee">
+	insert into employees
+	(employee_id, first_name, last_name, email, phone_number, hire_date, job_id, salary, commission_pct, manager_id, department_id)
+	values
+	(#empId#, #firstName#, #lastName#, #email#, #phone#, #hireDate#, #jobId#, #salary#, #commission#, #manId#, #depId#, sysDate)
+	</insert>
+	
+	<!-- 사원전체조회 -->
+	<select id="getAllEmp" resultClass="kr.co.jhta.vo.Employee">
+		select
+			employee_id as empId,
+			first_name as firstName,
+			last_name as lastName,
+			email as email,
+			phone_number as phone,
+			hire_date as hireDate,
+			job_id as jobId,
+			salary as salary,
+			commission_pct as commission,
+			manager_id as manId,
+			department_id as depId
+		from
+			employees
+		order by
+			employee_id asc
+	</select>
+	
+	<!-- 사원아이디로 조회 -->
+	<select id="getEmpId" parameterClass="int" resultClass="kr.co.jhta.vo.Employee">
+		select
+			employee_id as empId,
+			first_name as firstName,
+			last_name as lastName,
+			email as email,
+			phone_number as phone,
+			hire_date as hireDate,
+			job_id as jobId,
+			salary as salary,
+			commission_pct as commission,
+			manager_id as manId,
+			department_id as depId
+		from
+			employees
+		where
+			employee_id = #value#
+	</select>
+	<!-- 부서에 소속된 사원리스트 아이디로 조회 -->
+	<select id="getEmployeesByDepartmentId" parameterClass="int" resultClass="kr.co.jhta.vo.Employee">
+		select
+			employee_id as empId,
+			first_name as firstName,
+			last_name as lastName,
+			email as email,
+			phone_number as phone,
+			hire_date as hireDate,
+			job_id as jobId,
+			salary as salary,
+			commission_pct as commission,
+			manager_id as manId,
+			department_id as depId
+		from
+			employees
+		where
+			department_id = #value#
+	</select>
+	
+</sqlMap>

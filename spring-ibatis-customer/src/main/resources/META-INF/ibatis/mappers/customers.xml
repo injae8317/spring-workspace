@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+	
+<sqlMap>
+	<!-- 전체 고객정보 출력 -->
+	<select id="getAllCustomer" resultClass="kr.co.jhta.vo.Customer">
+		select
+			cust_no as no,
+			cust_name as name,
+			cust_nick as nick,
+			cust_phone as phone,
+			cust_email as email,
+			cust_city as city,
+			cust_point as point,
+			cust_create_date as createDate
+		from
+			customers
+		order by
+			cust_no asc
+	</select>
+	<!-- 상세 고객 정보 출력 -->
+	<select id="getCustomerByNo" parameterClass="int" resultClass="kr.co.jhta.vo.Customer">
+		select
+			cust_no as no,
+			cust_name as name,
+			cust_nick as nick,
+			cust_phone as phone,
+			cust_email as email,
+			cust_city as city,
+			cust_point as point,
+			cust_create_date as createDate
+		from
+			customers
+		where
+			cust_no = #value#
+	</select>
+	<!-- 고객정보 검색 -->
+	<!-- <select id="">
+	
+	</select> -->
+	<!-- 고객정보 변경-->
+	<update id="updateCustomers" parameterClass="kr.co.jhta.vo.Customer">
+		update 
+			customers
+		set
+			cust_name = #name#,
+			cust_nick = #nick#,
+			cust_phone = #phone#,
+			cust_email = #email#,
+			cust_city = #city#,
+			cust_point = #point#
+		where
+			cust_no = #no#
+	</update>
+	
+	
+</sqlMap>
